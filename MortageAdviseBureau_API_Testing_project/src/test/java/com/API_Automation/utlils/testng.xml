@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="API Test Suite">
+    <listeners>
+        <listener class-name="com.API_Automation.utlils.ReportListener"></listener>
+    </listeners>
+    <test name="API Testing">
+        <classes>
+            <class name="com.API_Automation.testcases.Get_List_Users">
+            </class>
+            <class name="com.API_Automation.testcases.Post_Login_Successful">
+            </class>
+            <class name="com.API_Automation.testcases.Post_Login_UnSuccessful">
+            </class>
+            <class name="com.API_Automation.testcases.Patch_Update">
+        </class>
+            <class name="com.API_Automation.testcases.Put_Update">
+            </class>
+
+
+        </classes>
+    </test>
+</suite>
