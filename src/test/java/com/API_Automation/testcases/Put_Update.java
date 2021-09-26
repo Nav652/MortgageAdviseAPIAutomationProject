@@ -2,6 +2,7 @@ package com.API_Automation.testcases;
 
 import com.API_Automation.config.APIPath;
 import com.API_Automation.config.BaseTest;
+import com.API_Automation.config.payload;
 import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
@@ -9,6 +10,10 @@ import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import static com.API_Automation.config.APIPath.PATCH_UPDATE;
+import static com.API_Automation.config.APIPath.PUT_UPDATE;
+import static io.restassured.RestAssured.given;
 
 public class Put_Update extends BaseTest {
 
@@ -19,20 +24,28 @@ public class Put_Update extends BaseTest {
      * This method will run before any test case and is dependent on BaseTest.setup
      */ 
     @BeforeClass(dependsOnMethods = "setup")
-    public void postLoginSuccesful() {
-        requestSpecification = RestAssured.given();
-        response = requestSpecification.request(Method.PUT, APIPath.PUT_UPDATE);
-        System.out.println(response.getBody().asString().toString());
+    @Test
+    public void putUpdate() {
+        response=given()
+                .header("Content-Type","application/json")
+                .body(payload.Put_Update())
+                .when()
+                .put(PUT_UPDATE)
+                .then()
+                .extract().response();
 
     }
 
-    /**
-     * Validate GET Response StatusCode
-     */
-    @Test(priority = 0)   //This test will run first to confirm the successful GET call.
-    public void getAllUsers_StatusCode() {
+    @Test(priority = 0)   //This test will run first to confirm the successful PUT call.
+    public void put_StatusCode() {
         Assert.assertEquals(response.getStatusCode(), 200
-                , "Get Request Response code mismatch -->");
+                , "Put Request Response code mismatch -->");
+        System.out.println(response.getBody().asString());
     }
-
+    @Test
+    public void putUpdate_Body_Validation(){
+        //Assert.assertEquals(response.getBody().asString(), payload.putResponse());
+        //Assert.assertTrue(true,"No Response body");
+    }
 }
+
